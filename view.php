@@ -58,6 +58,7 @@ if ($search !== '') {
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Created At</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 
@@ -65,6 +66,10 @@ if ($search !== '') {
                 <?php
                 if ($result && $result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        echo "<td>";
+                        echo "<a href='update.php?id=" . (int)$row['id'] . "' class='btn btn-sm btn-primary me-2'>Edit</a>";
+                        echo "<a href='delete.php?id=" . (int)$row['id'] . "' class='btn btn-sm btn-danger' onclick=\"return confirm('Are you sure you want to delete this student?');\">Delete</a>";
+                        echo "</td>";
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['id']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['name']) . "</td>";
@@ -74,7 +79,7 @@ if ($search !== '') {
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='5' class='text-center'>No entries found</td></tr>";
+                    echo "<tr><td colspan='6' class='text-center'>No entries found</td></tr>";
                 }
                 ?>
             </tbody>
