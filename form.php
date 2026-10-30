@@ -93,7 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </label>
                         <input type="text" id="name" name="name"
                                class="form-control"
-                               placeholder="Enter student name">
+                               placeholder="Enter student name"
+                               oninput="this.value = this.value.toUpperCase()">
                     </div>
 
                     <div class="mb-3">
@@ -106,14 +107,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="mb-3">
+                        Phone Number
                         <input type="tel" id="phone" name="phone"
-                               class="form-control"
-                               placeholder="Enter 10-digit phone number">
-                            Phone Number
+                               class="form-control" required
+                               maxlength="10"
+                               oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            
                         </label>
-                        <input type="tel" id="phone"
-                               class="form-control"
-                               placeholder="Enter 10-digit phone number">
+                        
                     </div>
 
                     <button type="submit" class="btn btn-success">
@@ -155,9 +156,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return;
             }
 
-            alert("Student form validated successfully!");
+            alert("Student registered successfully!");
         });
     </script>
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+          const nameInput = document.getElementById("name");
 
+           if (nameInput) {
+              nameInput.addEventListener("input", function () {
+            if (this.value.trim().length < 3) {
+                this.style.borderColor = "red";
+            } else {
+                this.style.borderColor = "green";
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
